@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Query } from 'react-apollo';
-
+import { Link } from 'react-router-dom';
 import { CLIENTS_QUERY } from '../Queries';
 
 const Clients = props => (
@@ -10,8 +10,6 @@ const Clients = props => (
                 return 'Cargando...';
             }
             if (error) return `Error: ${error.message}`;
-
-            console.log(data);
 
             return (
                 <Fragment>
@@ -24,7 +22,12 @@ const Clients = props => (
                                         {client.name} {client.surname} - {client.company}
                                     </div>
                                     <div className="col-md-4 d-flex justify-content-end">
-                                        <a className="btn btn-success d-block d-md-inline-block">Editar Cliente</a>
+                                        <Link
+                                            to={`/client/edit/${client.id}`}
+                                            className="btn btn-success d-block d-md-inline-block"
+                                        >
+                                            Editar Cliente
+                                        </Link>
                                     </div>
                                 </div>
                             </li>
