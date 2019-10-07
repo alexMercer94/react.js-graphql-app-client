@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { CLIENTS_QUERY } from '../Queries';
 
 const Clients = props => (
-    <Query query={CLIENTS_QUERY}>
-        {({ loading, error, data }) => {
+    <Query query={CLIENTS_QUERY} pollInterval={1000}>
+        {({ loading, error, data, startPolling, stopPolling }) => {
             if (loading) {
                 return 'Cargando...';
             }
