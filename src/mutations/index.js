@@ -9,3 +9,19 @@ export const NEW_CLIENT = gql`
         }
     }
 `;
+
+export const UPDATE_CLIENT = gql`
+    mutation updateClient($input: ClientInput) {
+        updateClient(input: $input) {
+            id
+            name
+            surname
+            age
+            company
+            emails {
+                email
+            }
+            type
+        }
+    }
+`;

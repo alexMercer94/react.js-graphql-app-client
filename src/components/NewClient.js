@@ -70,7 +70,7 @@ class NewClient extends Component {
                                 className="col-md-8 m-3"
                                 onSubmit={e => {
                                     e.preventDefault();
-                                    const { name, surname, company, age, email, type } = this.state.client;
+                                    const { name, surname, company, age, type } = this.state.client;
                                     const { emails } = this.state;
 
                                     if (name === '' || surname === '' || company === '' || age === '' || type === '') {

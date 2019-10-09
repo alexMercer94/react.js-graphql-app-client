@@ -10,3 +10,23 @@ export const CLIENTS_QUERY = gql`
         }
     }
 `;
+
+export const CLIENT_QUERY = gql`
+    query consultClient($id: ID) {
+        getClient(id: $id) {
+            id
+            name
+            surname
+            company
+            emails {
+                email
+            }
+            age
+            type
+            pedidos {
+                product
+                price
+            }
+        }
+    }
+`;
