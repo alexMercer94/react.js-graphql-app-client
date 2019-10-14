@@ -39,3 +39,19 @@ export const NEW_PRODUCT = gql`
         }
     }
 `;
+
+export const DELETE_PRODUCT = gql`
+    mutation deleteProduct($id: ID!) {
+        deleteProduct(id: $id)
+    }
+`;
+
+export const UPDATE_PRODUCT = gql`
+    mutation updateProduct($input: ProductInput) {
+        updateProduct(input: $input) {
+            name
+            price
+            stock
+        }
+    }
+`;
