@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { NEW_CLIENT } from '../mutations';
+import { NEW_CLIENT } from '../../mutations';
 import { Mutation } from 'react-apollo';
 
 class NewClient extends Component {
