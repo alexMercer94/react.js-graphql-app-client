@@ -29,9 +29,9 @@ function App() {
                     <Header></Header>
                     <div className="container">
                         <Switch>
-                            <Route exact path="/" component={Clients}></Route>
-                            <Route exac path="/client/edit/:id" component={EditClient}></Route>
-                            <Route exac path="/client/new" component={NewClient}></Route>
+                            <Route exact path="/clients" component={Clients}></Route>
+                            <Route exac path="/clients/edit/:id" component={EditClient}></Route>
+                            <Route exac path="/clients/new" component={NewClient}></Route>
                             <Route exac path="/products/edit/:id" component={EditProduct}></Route>
                             <Route exac path="/products/new" component={NewProduct}></Route>
                             <Route exac path="/products" component={Products}></Route>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Paginator extends Component {
     state = {
         paginator: {
-            pages: Math.ceil(Number(this.props.totalClients) / this.props.limit)
+            pages: Math.ceil(Number(this.props.total) / this.props.limit)
         }
     };
 
