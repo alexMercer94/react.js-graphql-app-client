@@ -24,17 +24,13 @@ export const CLIENT_QUERY = gql`
             }
             age
             type
-            pedidos {
-                product
-                price
-            }
         }
     }
 `;
 
 export const GET_PRODUCTS = gql`
-    query getProducts($limit: Int, $offset: Int) {
-        getProducts(limit: $limit, offset: $offset) {
+    query getProducts($limit: Int, $offset: Int, $stock: Boolean) {
+        getProducts(limit: $limit, offset: $offset, stock: $stock) {
             id
             name
             price
