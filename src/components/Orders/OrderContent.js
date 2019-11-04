@@ -69,7 +69,7 @@ class OrderContent extends Component {
     };
 
     render() {
-        const message = this.state.total < 0 ? <Error error="Las cantidades no pueden ser negativas"></Error> : '';
+        const message = this.state.total < 0 ? <Error error="Las cantidades no pueden ser negativas XD"></Error> : '';
         return (
             <Fragment>
                 <h2 className="text-center mb-5">Seleccionar Artículos</h2>
