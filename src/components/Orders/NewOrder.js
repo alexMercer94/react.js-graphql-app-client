@@ -18,7 +18,7 @@ class NewOrder extends Component {
                         <ClientData id={id}></ClientData>
                     </div>
                     <div className="col-md-9">
-                        <Query query={GET_PRODUCTS} variables={{ stock: true }}>
+                        <Query query={GET_PRODUCTS} variables={{ stock: false }}>
                             {({ loading, error, data }) => {
                                 if (loading) {
                                     return (

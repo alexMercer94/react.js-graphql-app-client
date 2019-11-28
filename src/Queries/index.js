@@ -52,7 +52,7 @@ export const GET_PRODUCT = gql`
 
 // Orders
 export const GET_ORDERS = gql`
-    query getOrders($client: String) {
+    query getOrders($client: ID) {
         getOrders(client: $client) {
             id
             total
@@ -61,6 +61,18 @@ export const GET_ORDERS = gql`
             order {
                 id
                 amount
+            }
+        }
+    }
+`;
+
+// Charts
+export const TOP_CLIENTS = gql`
+    query topClients {
+        topClients {
+            total
+            client {
+                name
             }
         }
     }
