@@ -69,3 +69,11 @@ export const UPDATE_STATE = gql`
         updateState(input: $input)
     }
 `;
+
+// Users
+
+export const NEW_USER = gql`
+    mutation createUser($user: String!, $password: String!) {
+        createUser(user: $user, password: $password)
+    }
+`;
