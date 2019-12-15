@@ -2,12 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
 import { NEW_USER } from '../../mutations';
 import Error from '../Alerts/Error';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 const initialState = {
     user: '',
     password: '',
-    repeatPassword: ''
+    repeatPassword: '',
+    name: '',
+    role: ''
 };
 
 class Register extends Component {
@@ -30,8 +32,8 @@ class Register extends Component {
      * Validate form's data
      */
     validateForm = () => {
-        const { user, password, repeatPassword } = this.state;
-        const noValid = !user || !password || password !== repeatPassword;
+        const { user, password, repeatPassword, name, role } = this.state;
+        const noValid = !user || !password || !name || !role || password !== repeatPassword;
 
         return noValid;
     };
@@ -59,13 +61,17 @@ class Register extends Component {
     };
 
     render() {
-        const { user, password, repeatPassword } = this.state;
+        const { user, password, repeatPassword, name, role } = this.state;
+
+        const userRole = this.props.session.getUser.role;
+        const redirection = userRole !== 'ADMINISTRATOR' ? <Redirect to="/clients"></Redirect> : '';
 
         return (
             <Fragment>
+                {redirection}
                 <h1 className="text-center mb-5">Nuevo usuario</h1>
                 <div className="row  justify-content-center">
-                    <Mutation mutation={NEW_USER} variables={{ user, password }}>
+                    <Mutation mutation={NEW_USER} variables={{ user, name, password, role }}>
                         {(createUser, { loading, error, data }) => {
                             return (
                                 <form onSubmit={e => this.createNewUser(e, createUser)} className="col-md-8">
@@ -80,28 +86,58 @@ class Register extends Component {
                                             onChange={this.updateState}
                                             value={user}
                                         />
+                                        <small className="form-text text-muted">
+                                            (Sin espacios y sin carácteres especiales)
+                                        </small>
                                     </div>
                                     <div className="form-group">
-                                        <label>Password</label>
+                                        <label>Nombre</label>
                                         <input
-                                            type="password"
-                                            name="password"
+                                            type="text"
+                                            name="name"
                                             className="form-control"
-                                            placeholder="Password"
+                                            placeholder="Nombre Completo"
                                             onChange={this.updateState}
-                                            value={password}
+                                            value={name}
                                         />
+                                        <small className="form-text text-muted">(Agregar el Nombre y Apellidos)</small>
+                                    </div>
+                                    <div className="row">
+                                        <div className="form-group col-md-6">
+                                            <label>Password</label>
+                                            <input
+                                                type="password"
+                                                name="password"
+                                                className="form-control"
+                                                placeholder="Password"
+                                                onChange={this.updateState}
+                                                value={password}
+                                            />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label>Repetir Password</label>
+                                            <input
+                                                type="password"
+                                                name="repeatPassword"
+                                                className="form-control"
+                                                placeholder="Repetir Password"
+                                                onChange={this.updateState}
+                                                value={repeatPassword}
+                                            />
+                                        </div>
                                     </div>
                                     <div className="form-group">
-                                        <label>Repetir Password</label>
-                                        <input
-                                            type="password"
-                                            name="repeatPassword"
+                                        <label>Rol: </label>
+                                        <select
                                             className="form-control"
-                                            placeholder="Repetir Password"
+                                            value={role}
+                                            name="role"
                                             onChange={this.updateState}
-                                            value={repeatPassword}
-                                        />
+                                        >
+                                            <option value="">Eligir...</option>
+                                            <option value="ADMINISTRATOR">Administrador</option>
+                                            <option value="SELLER">Vendedor</option>
+                                        </select>
                                     </div>
 
                                     <button

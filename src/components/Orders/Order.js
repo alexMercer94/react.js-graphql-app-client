@@ -4,6 +4,8 @@ import { Query, Mutation } from 'react-apollo';
 import Resumen from './Resumen';
 import { UPDATE_STATE } from '../../mutations';
 
+import '../../orders.css';
+
 const Order = props => {
     const { order } = props;
     const date = new Date(Number(order.date));
@@ -12,7 +14,7 @@ const Order = props => {
 
     let clase;
     if (state === 'PENDIENTE') {
-        clase = 'border-warning';
+        clase = 'border-light';
     } else if (state === 'CANCELADO') {
         clase = 'border-danger';
     } else {
@@ -58,12 +60,8 @@ const Order = props => {
                         Fecha Pedido:
                         <span className="font-weight-normal"> {date.toLocaleString('es-MX')}</span>
                     </p>
-                    <p className="card-text font-weight-bold">
-                        Total:
-                        <span className="font-weight-normal"> $ {order.total}</span>
-                    </p>
 
-                    <h3 className="card-text text-center mb-3">Artículos del pedido</h3>
+                    <h3 className="resaltar-text card-text text-center mb-3">Artículos del pedido</h3>
                     {order.order.map((product, index) => {
                         const { id } = product;
                         return (
@@ -82,6 +80,10 @@ const Order = props => {
                             </Query>
                         );
                     })}
+                    <div className="d-flex align-items-center">
+                        <p className="card-text resaltar-text mr-1 bg-yellw">Total:</p>
+                        <p className="font-weight-normal inc-text"> $ {order.total}</p>
+                    </div>
                 </div>
             </div>
         </div>

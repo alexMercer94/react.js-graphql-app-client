@@ -39,17 +39,26 @@ class Clients extends Component {
     };
 
     render() {
+        // Alerta en caso de quea exitoso
         const {
             alert: { show, message }
         } = this.state;
 
         const alert = show ? <Success message={message}></Success> : '';
 
+        // Obtener el ID del vendedor para mostrar sus clientes
+        let id;
+        const { role } = this.props.session.getUser;
+        if (role === 'SELLER') {
+            id = this.props.session.getUser.id;
+        } else {
+            id = '';
+        }
         return (
             <Query
                 query={CLIENTS_QUERY}
                 pollInterval={1000}
-                variables={{ limit: this.limit, offset: this.state.paginator.offset }}
+                variables={{ limit: this.limit, offset: this.state.paginator.offset, seller: id }}
             >
                 {({ loading, error, data, startPolling, stopPolling }) => {
                     if (loading) {

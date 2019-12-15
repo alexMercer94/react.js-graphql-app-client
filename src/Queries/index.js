@@ -1,14 +1,14 @@
 import gql from 'graphql-tag';
 
 export const CLIENTS_QUERY = gql`
-    query getClients($limit: Int, $offset: Int) {
-        getClients(limit: $limit, offset: $offset) {
+    query getClients($limit: Int, $offset: Int, $seller: String) {
+        getClients(limit: $limit, offset: $offset, seller: $seller) {
             id
             name
             surname
             company
         }
-        totalClients
+        totalClients(seller: $seller)
     }
 `;
 
@@ -78,11 +78,25 @@ export const TOP_CLIENTS = gql`
     }
 `;
 
+export const TOP_SELLERS = gql`
+    query topSellers {
+        topSellers {
+            total
+            seller {
+                name
+            }
+        }
+    }
+`;
+
 // Users
 export const ACTUAL_USER = gql`
     query getUser {
         getUser {
+            id
             user
+            name
+            role
         }
     }
 `;

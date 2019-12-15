@@ -2,14 +2,15 @@ import React, { Component, Fragment } from 'react';
 import ClientData from './ClientData';
 import { Query } from 'react-apollo';
 import { GET_PRODUCTS } from '../../Queries';
-
+import { withRouter } from 'react-router-dom';
 import '../../Spinner.css';
 import OrderContent from './OrderContent';
 
 class NewOrder extends Component {
     render() {
         const { id } = this.props.match.params;
-
+        // Obtener ID del vendedor actual
+        const idSeller = this.props.session.getUser.id;
         return (
             <Fragment>
                 <h1 className="text-center mb-5">Nuevo Pedido</h1>
@@ -41,7 +42,13 @@ class NewOrder extends Component {
 
                                 if (error) return `Error ${error.message}`;
 
-                                return <OrderContent id={id} products={data.getProducts}></OrderContent>;
+                                return (
+                                    <OrderContent
+                                        id={id}
+                                        idSeller={idSeller}
+                                        products={data.getProducts}
+                                    ></OrderContent>
+                                );
                             }}
                         </Query>
                     </div>
@@ -51,4 +58,4 @@ class NewOrder extends Component {
     }
 }
 
-export default NewOrder;
+export default withRouter(NewOrder);

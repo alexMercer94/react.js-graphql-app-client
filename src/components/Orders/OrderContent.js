@@ -96,6 +96,7 @@ class OrderContent extends Component {
                     idClient={this.props.id}
                     products={this.state.products}
                     total={this.state.total}
+                    idSeller={this.props.idSeller}
                 ></GenerateOrder>
             </Fragment>
         );

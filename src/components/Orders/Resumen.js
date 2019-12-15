@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 const Resumen = ({ amount, product }) => {
     return (
         <Fragment>
-            <div className="border mb-4 p-4">
+            <div className="products-container mb-4 p-4">
                 <p className="card-text font-weight-bold">
                     Nombre del Producto:
                     <span className="font-weight-normal"> {product.name}</span>

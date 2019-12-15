@@ -24,7 +24,8 @@ const GenerateOrder = props => {
                         const input = {
                             order: productsInput,
                             total: props.total,
-                            client: props.idClient
+                            client: props.idClient,
+                            seller: props.idSeller
                         };
 
                         newOrder({

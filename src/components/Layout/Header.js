@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Logout from './Logout';
+import RegisterButton from './RegisterButton';
 
 const Header = ({ session }) => {
     let barra = session.getUser ? (
-        <NavigationAuthenticated></NavigationAuthenticated>
+        <NavigationAuthenticated session={session}></NavigationAuthenticated>
     ) : (
         <NavigationNoAuthenticated></NavigationNoAuthenticated>
     );
@@ -21,7 +22,7 @@ const NavigationNoAuthenticated = () => (
     </h3>
 );
 
-const NavigationAuthenticated = () => (
+const NavigationAuthenticated = ({ session }) => (
     <Fragment>
         <Link to="/" className="navbar-brand text-light font-weight-bold">
             CRM
@@ -67,6 +68,7 @@ const NavigationAuthenticated = () => (
                         </Link>
                     </div>
                 </li>
+                <RegisterButton session={session}></RegisterButton>
                 <Logout></Logout>
             </ul>
         </div>

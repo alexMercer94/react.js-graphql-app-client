@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { NEW_CLIENT } from '../../mutations';
 import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 class NewClient extends Component {
     state = {
@@ -52,6 +53,7 @@ class NewClient extends Component {
 
     render() {
         const { error } = this.state;
+        const idSeller = this.props.session.getUser.id;
 
         let response = error ? (
             <p className="alert alert-danger p-3 text-center">Todos los campos son obligatorios</p>
@@ -64,7 +66,7 @@ class NewClient extends Component {
                 <h2 className="text-center">Nuevo Cliente</h2>
                 {response}
                 <div className="row justify-content-center">
-                    <Mutation mutation={NEW_CLIENT} onCompleted={() => this.props.history.push('/')}>
+                    <Mutation mutation={NEW_CLIENT} onCompleted={() => this.props.history.push('/clients')}>
                         {createClient => (
                             <form
                                 className="col-md-8 m-3"
@@ -90,7 +92,8 @@ class NewClient extends Component {
                                         company,
                                         age: Number(age),
                                         emails,
-                                        type
+                                        type,
+                                        seller: idSeller
                                     };
                                     createClient({
                                         variables: { input }
@@ -225,4 +228,4 @@ class NewClient extends Component {
     }
 }
 
-export default NewClient;
+export default withRouter(NewClient);
